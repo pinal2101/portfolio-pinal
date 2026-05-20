@@ -1,16 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact = () => {
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('Thanks! This demo form doesn’t send email yet — use mailto or connect your backend.');
+    const form = e.target;
+    const email = form.email?.value;
+    const subject = form.subject?.value || 'Portfolio contact';
+    const body = encodeURIComponent(form.message?.value || '');
+    if (email) {
+      window.location.href = `mailto:pinalprajapati3543@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }
+  };
+
   return (
-    <section id="contact">
+    <section id="contact" className="contact">
       <div className="container">
-        <h2 className="section-title" style={{ textAlign: 'center', display: 'block' }}>Let's Connect</h2>
-        <div className="contact-card">
-          <p><i className="fas fa-envelope"></i> pinalprajapati3543@gmail.com</p>
-          <p><i className="fas fa-phone-alt"></i> +91 9586823708</p>
-          <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/pinal-prajapati-4577272a4" target="_blank" rel="noopener noreferrer" style={{ color: '#00d4ff' }}>linkedin.com/in/pinal-prajapati</a></p>
-          <a href="mailto:pinalprajapati3543@gmail.com" className="btn btn-primary">Send Email <i className="fas fa-paper-plane"></i></a>
-        </div>
+        <h2 className="heading section-title contact_heading">
+          Contact <span>Me!</span>
+        </h2>
+
+        <form className="contact_form" onSubmit={handleSubmit}>
+          <div className="input_box row">
+            <input name="full_name" type="text" placeholder="Full Name" data-aos="fade-right" data-aos-duration="1500" />
+            <input name="email" type="email" placeholder="Email Address" data-aos="fade-left" data-aos-duration="1500" />
+          </div>
+          <div className="input_box row">
+            <input name="phone" type="tel" placeholder="Mobile Number" data-aos="fade-right" data-aos-duration="1500" />
+            <input name="subject" type="text" placeholder="Email subject" data-aos="fade-left" data-aos-duration="1500" />
+          </div>
+          <textarea name="message" rows={10} placeholder="Your Message" data-aos="zoom-in" data-aos-duration="1500" />
+          {status && <p className="form_status">{status}</p>}
+          <div className="submit">
+            <input className="send_msg" type="submit" value="Send Message" />
+          </div>
+        </form>
       </div>
     </section>
   );

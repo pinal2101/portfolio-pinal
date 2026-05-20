@@ -4,31 +4,41 @@ const Footer = () => {
   return (
     <footer>
       <div className="container">
-        <div className="social-links">
-          <a 
-            href="https://www.linkedin.com/in/pinal-prajapati-4577272a4" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-          <a 
-            href="https://github.com/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-          <a 
-            href="mailto:pinalprajapati3543@gmail.com"
-            aria-label="Email"
-          >
-            <i className="fas fa-envelope"></i>
-          </a>
+        <div className="social footer_icons">
+          <ul>
+            <li>
+              <a href="tel:+919586823708" target="_blank" rel="noopener noreferrer" aria-label="Phone">
+                <i className="justify_center align_center fa-solid fa-phone" />
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/919586823708" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i className="justify_center align_center fa-brands fa-whatsapp" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/pinal-prajapati-4577272a4"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <i className="align_center justify_center fa-brands fa-linkedin-in" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i className="align_center justify_center mr_0 fa-brands fa-instagram" />
+              </a>
+            </li>
+          </ul>
         </div>
-        <p>© {new Date().getFullYear()} Pinal Prajapati — MERN Stack Developer | Built with ⚛️ React</p>
+        <div className="footer_txt">
+          <p className="footer_muted">Designed &amp; Developed by Pinal Prajapati</p>
+          <p>
+            Copyright &copy; {new Date().getFullYear()} | All Rights Reserved
+          </p>
+        </div>
       </div>
     </footer>
   );

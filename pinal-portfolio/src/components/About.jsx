@@ -1,41 +1,75 @@
 import React from 'react';
+import aboutPic from '../assets/images/about_pic.png'; // Adjust the path based on your folder structure
+
+const toolIcons = [
+  { icon: 'fa-brands fa-react', label: 'React' },
+  { icon: 'fa-brands fa-node-js', label: 'Node' },
+  { icon: 'fa-brands fa-js', label: 'JavaScript' },
+  { icon: 'fa-brands fa-html5', label: 'HTML5' },
+  { icon: 'fa-brands fa-css3-alt', label: 'CSS3' },
+  { icon: 'fa-solid fa-database', label: 'MongoDB' },
+  { icon: 'fa-brands fa-bootstrap', label: 'Bootstrap' },
+  { icon: 'fa-brands fa-github', label: 'GitHub' },
+];
 
 const About = () => {
   return (
-    <section id="about">
+    <section className="about_sec" id="about">
       <div className="container">
-        <h2 className="section-title">About Me</h2>
-        <div className="about-grid">
-          <div className="about-text">
-            <p style={{ marginBottom: '1rem', fontSize: '1.05rem' }}>
-              Hey, I'm Pinal — a MERN stack developer with internship experience and a hunger to learn. 
-              I've developed and optimized dynamic web apps using React, Next.js, and Node.js. 
-              I enjoy building REST APIs, integrating JWT authentication, and working with cloudinary file uploads.
-            </p>
-            <p>
-              My goal is to work with an organization where I can learn new skills and increase my abilities 
-              for organizational goals as well as personal growth.
-            </p>
+        <div className="row justify_spc_btwn align_center about_row">
+          <div className="col_30 about_photo_wrap">
+            <div className="about_photo" data-aos="fade-down" data-aos-duration="2000">
+              {/* Removed about_illustration div - image directly here */}
+              <img 
+                src={aboutPic} 
+                alt="About Pinal Prajapati" 
+                className="about_image"
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  display: 'block'
+                }}
+              />
+            </div>
           </div>
-            <div className="about-text" style={{ color: '#9090b0', lineHeight: '1.7' }}>
-              <p style={{ marginBottom: '1rem', fontSize: '1.05rem' }}>
-                Hey, I'm Pinal — a MERN stack developer with professional experience and a hunger to learn. 
-                I've developed and optimized dynamic web apps using React, Next.js, and Node.js. 
-                I enjoy building REST APIs, integrating JWT authentication, and working with cloudinary file uploads.
+
+          <div className="col_45 about_txt_wrap" data-aos="fade-up" data-aos-duration="2000">
+            <div className="about_txt">
+              <h2 className="txt_up font_50 section-title-inline">
+                about <span>me</span>
+              </h2>
+              <p>
+                Hey, I&apos;m <span>Pinal</span> — a MERN stack developer with professional experience and a hunger to
+                learn. I&apos;ve built and optimized dynamic web apps with React, Next.js, and Node.js.
               </p>
               <p>
-                My goal is to work with an organization where I can learn new skills and increase my abilities 
-                for organizational goals as well as personal growth.
+                I enjoy REST APIs, JWT auth, Cloudinary uploads, and Supabase (PostgreSQL + RLS). My goal is to grow with
+                a team while delivering clean, maintainable code.
               </p>
+
+              <div className="key_skills">
+                <h3 className="txt_cap">Skills</h3>
+                <ul>
+                  <li>
+                    <strong>Frontend:</strong> Responsive UI with React, Next.js, Tailwind CSS, and MUI.
+                  </li>
+                  <li>
+                    <strong>Backend:</strong> Node.js, Express, REST APIs, authentication, and file uploads.
+                  </li>
+                  <li>Expertise in tools / languages such as :-</li>
+                </ul>
+              </div>
             </div>
-          <div className="info-card">
-            <div className="info-item"><span className="info-label">Name</span><span className="info-value">Pinal Prajapati</span></div>
-            <div className="info-item"><span className="info-label">Email</span><span className="info-value">pinalprajapati3543@gmail.com</span></div>
-            <div className="info-item"><span className="info-label">Age</span><span className="info-value">24 Years (Born 2001)</span></div>
-            <div className="info-item"><span className="info-label">Phone</span><span className="info-value">+91 9586823708</span></div>
-            <div className="info-item"><span className="info-label">Location</span><span className="info-value">Ahmedabad, India</span></div>
-            <div className="info-item"><span className="info-label">Freelance</span><span className="info-value">Available ✅</span></div>
-              <div className="info-item"><span className="info-label">LinkedIn</span><span className="info-value"><a href="https://www.linkedin.com/in/pinal-prajapati-4577272a4" target="_blank" rel="noopener noreferrer" style={{ color: '#00d4ff' }}>pinal-prajapati</a></span></div>
+
+            <ul className="tools row">
+              {toolIcons.map((t, idx) => (
+                <li data-aos="flip-right" data-aos-duration="1500" className="tool d_inline_blc" key={t.label}>
+                  <div className="tool_icon_cell" title={t.label}>
+                    <i className={t.icon} aria-hidden="true" />
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
