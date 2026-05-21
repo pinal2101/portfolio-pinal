@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 const navItems = [
-  { id: 'home', label: 'home' },
+  { id: 'home', label: 'Home' },  // Fixed capitalization
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'services', label: 'Services' },
-  { id: 'projects', label: 'my work' },
-  { id: 'contact', label: 'contact' },
+  { id: 'contact', label: 'Contact' },   // Fixed capitalization
 ];
 
 const Header = () => {
@@ -17,36 +16,60 @@ const Header = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 80; // Adjust this based on your header height
+      const elementPosition = element.offsetTop - offset;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+      
       setActiveSection(sectionId);
     }
     setMenuOpen(false);
   };
 
   useEffect(() => {
-    const onScroll = () => {
+    const handleScroll = () => {
+      // Sticky header
       setSticky(window.scrollY > 50);
+      
+      // Active section detection
       const sections = navItems.map((n) => n.id);
-      const scrollPos = window.scrollY + 120;
-      for (let i = sections.length - 1; i >= 0; i -= 1) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sections[i]);
-          break;
+      const scrollPosition = window.scrollY + 100; // Offset for header height
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            setActiveSection(sections[i]);
+            break;
+          }
         }
       }
     };
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once to set initial active section
+    
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <header id="main-header" className={`main-header ${sticky ? 'menu-fixed' : ''}`}>
       <div className="container">
         <div className="row align_center justify_spc_btwn nav">
-          <div className="logo logo_text" onClick={() => scrollToSection('home')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && scrollToSection('home')}>
-            PP
+          <div 
+            className="logo logo_text" 
+            onClick={() => scrollToSection('home')} 
+            role="button" 
+            tabIndex={0} 
+            onKeyDown={(e) => e.key === 'Enter' && scrollToSection('home')}
+          >
+            Pinal
           </div>
 
           <button
@@ -55,7 +78,7 @@ const Header = () => {
             className="menu"
             aria-expanded={menuOpen}
             aria-label="Toggle menu"
-            onClick={() => setMenuOpen((o) => !o)}
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             <i className={`fa-solid fa-2x ${menuOpen ? 'fa-times' : 'fa-bars'}`} />
           </button>

@@ -27,8 +27,14 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i className="align_center justify_center mr_0 fa-brands fa-instagram" />
+              {/* Instagram removed - GitHub added below */}
+              <a 
+                href="https://github.com/pinalprajapati" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="GitHub"
+              >
+                <i className="align_center justify_center fa-brands fa-github" />
               </a>
             </li>
           </ul>

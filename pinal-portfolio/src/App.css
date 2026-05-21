@@ -1,4 +1,3 @@
-/* Reference: kishanpatel109.github.io/portfolio */
 :root {
   --bg: #202020;
   --bg-card: #313743;
@@ -69,18 +68,42 @@ header {
   background-color: var(--bg);
   width: 100%;
   transition: all 0.3s ease;
-}
-
-header.sticky {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
-  animation: slidedown 0.5s ease-in-out;
-  box-shadow: 0 4px 20px rgba(142, 197, 251, 0.15);
+  z-index: 200;
 }
 
+#main-header.menu-fixed {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background-color: var(--bg) !important;
+  box-shadow: 0 4px 20px rgba(142, 197, 251, 0.15) !important;
+  animation: slidedown 0.5s ease-in-out !important;
+  padding: 12px 0 !important;
+}
+
+/* Make sure header doesn't have any conflicting position */
+header {
+  position: relative;
+}
+
+/* For desktop nav - ensure it's above content */
+#main-header.menu-fixed nav {
+  background-color: var(--bg);
+}
+
+@keyframes slidedown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 nav {
   display: flex;
   justify-content: space-between;
@@ -1593,7 +1616,53 @@ main {
   }
 }
 
-/* Contact */
+/* ========== CONTACT ========== */
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  background-color: var(--bg-card);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-card:hover {
+  box-shadow: 0 5px 25px 8px rgba(142, 197, 251, 0.25);
+}
+
+.contact-card p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.contact-card p i {
+  color: var(--accent);
+  margin-right: 10px;
+  width: 24px;
+}
+
+.contact-card a:not(.btn) {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-card a:not(.btn):hover {
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.send_msg {
+  margin-top: 1rem;
+}
+
+/* ========== UPDATED CONTACT FORM STYLES WITH GAPS ========== */
 .contact_heading span {
   color: var(--accent);
 }
@@ -1601,21 +1670,42 @@ main {
 .contact_form {
   max-width: 720px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;  /* Overall form fields ke beech gap */
 }
 
 .contact .input_box {
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;  /* Dono input fields ke beech gap (20px approx) */
+  width: 100%;
+}
+
+.contact .input_box.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;  /* Row ke andar gap */
+  margin-bottom: 0;
 }
 
 .contact .input_box input {
-  flex: 1 1 44%;
-  min-width: 140px;
+  flex: 1 1 calc(50% - 0.625rem);  /* 50% minus half gap */
+  min-width: 180px;
   background-color: var(--bg-card);
-  padding: 14px 12px;
+  padding: 16px 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
+  font-size: 1rem;
   outline: none;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.contact .input_box input:focus {
+  outline: 2px solid var(--accent);
+  box-shadow: 0 0 15px rgba(142, 197, 251, 0.3);
 }
 
 .contact textarea {
@@ -1623,18 +1713,82 @@ main {
   box-sizing: border-box;
   background-color: var(--bg-card);
   border: none;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 16px 18px;
   color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
   resize: vertical;
   min-height: 160px;
   outline: none;
-  margin-top: 6px;
+  transition: all 0.3s ease;
 }
 
-.contact textarea:focus-visible,
-.contact .input_box input:focus-visible {
+.contact textarea:focus {
   outline: 2px solid var(--accent);
+  box-shadow: 0 0 15px rgba(142, 197, 251, 0.3);
+}
+
+/* Submit button styling */
+.contact .submit {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.contact .send_msg {
+  background-color: var(--accent);
+  color: #000;
+  border: none;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact .send_msg:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(142, 197, 251, 0.4);
+  background-color: #a8d4ff;
+}
+
+.contact .send_msg:active {
+  transform: translateY(0);
+}
+
+/* Form status message */
+.form_status {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(142, 197, 251, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact .input_box {
+    gap: 1rem;
+  }
+  
+  .contact .input_box input {
+    flex: 1 1 100%;  /* Mobile pe full width */
+    min-width: 100%;
+  }
+  
+  .contact_form {
+    gap: 1rem;
+  }
+  
+  .contact .input_box.row {
+    gap: 1rem;
+  }
 }
 
 .form_status {
